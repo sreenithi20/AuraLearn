@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Learning Path Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js"; import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js"; import { getFirestore,
+        collection, addDoc, getDocs, doc, getDoc, setDoc, updateDoc, deleteDoc, onSnapshot, query, where } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js"; // Global variables for Firebase (will be initialized in script.js) window.firebaseApp
+        = null; window.db = null; window.auth = null; window.currentUserId = null; window.appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id'; // Provided by Canvas environment window.firebaseConfig = typeof __firebase_config !== 'undefined'
+        ? JSON.parse(__firebase_config) : {}; // Provided by Canvas environment window.initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null; // Provided by Canvas environment // Initialize Firebase and authenticate
+        document.addEventListener('DOMContentLoaded', async () => { if (Object.keys(window.firebaseConfig).length > 0) { window.firebaseApp = initializeApp(window.firebaseConfig); window.db = getFirestore(window.firebaseApp); window.auth = getAuth(window.firebaseApp);
+        onAuthStateChanged(window.auth, (user) => { if (user) { window.currentUserId = user.uid; console.log("Firebase Auth State Changed: User is signed in with UID:", user.uid); document.getElementById('user-status').textContent = `Logged in as: ${user.uid}`;
+        } else { window.currentUserId = null; console.log("Firebase Auth State Changed: No user is signed in."); document.getElementById('user-status').textContent = 'Not logged in'; } }); // Attempt to sign in with custom token or anonymously if (window.initialAuthToken)
+        { try { await signInWithCustomToken(window.auth, window.initialAuthToken); console.log("Signed in with custom token."); } catch (error) { console.error("Error signing in with custom token:", error); await signInAnonymously(window.auth); console.log("Signed
+        in anonymously due to custom token error."); } } else { await signInAnonymously(window.auth); console.log("Signed in anonymously (no custom token provided)."); } } else { console.warn("Firebase config not found. Firebase features will not be available.");
+        document.getElementById('user-status').textContent = 'Firebase not configured'; } });
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Personalized Learning Path Generator</h1>
+        <p>Combine your interests to discover unique learning journeys.</p>
+        <div id="user-info">
+            <span id="user-status">Initializing Firebase...</span>
+        </div>
+    </header>
+
+    <main>
+        <section class="input-section">
+            <h2>Generate Your Path</h2>
+            <div class="input-group">
+                <label for="primary-interest">Primary Interest:</label>
+                <input type="text" id="primary-interest" placeholder="e.g., AI, Space, Health" aria-label="Primary Interest">
+            </div>
+            <div class="input-group">
+                <label for="interdisciplinary-topics">Related Topics (comma-separated):</label>
+                <input type="text" id="interdisciplinary-topics" placeholder="e.g., Agriculture, Ethics, Data Science" aria-label="Related Interdisciplinary Topics">
+            </div>
+            <div class="button-group">
+                <button id="generate-path-btn">Generate Path</button>
+                <button id="clear-inputs-btn">Clear Inputs</button>
+                <button id="save-path-btn">Save Current Path</button>
+                <button id="load-path-btn">Load Last Path</button>
+                <button id="clear-path-btn">Clear Current Path</button>
+            </div>
+        </section>
+
+        <section class="output-section">
+            <h2>Your Learning Path</h2>
+            <div class="path-controls">
+                <div class="filter-group">
+                    <label for="filter-category">Filter by Category:</label>
+                    <select id="filter-category" aria-label="Filter by Category">
+                        <option value="">All Categories</option>
+                        <option value="AI">AI</option>
+                        <option value="Agriculture">Agriculture</option>
+                        <option value="Data Science">Data Science</option>
+                        <option value="Space">Space</option>
+                        <option value="Ethics">Ethics</option>
+                        <!-- Updated options from Gemini's potential output -->
+                        <option value="Programming">Programming</option>
+                        <option value="Science">Science</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Web Development">Web Development</option>
+                        <option value="Mathematics">Mathematics</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="filter-type">Filter by Type:</label>
+                    <select id="filter-type" aria-label="Filter by Type">
+                        <option value="">All Types</option>
+                        <option value="Article">Article</option>
+                        <option value="Course">Course</option>
+                        <option value="Course (Video)">Course (Video)</option>
+                        <option value="Guide">Guide</option>
+                        <option value="Tutorial">Tutorial</option>
+                        <option value="Resource Hub">Resource Hub</option>
+                        <option value="Video Series">Video Series</option>
+                        <option value="Book">Book</option>
+                        <option value="Documentation">Documentation</option>
+                        <option value="Fact Sheet">Fact Sheet</option>
+                        <!-- Updated options from Gemini's potential output -->
+                        <option value="Website">Website</option>
+                        <option value="Podcast">Podcast</option>
+                        <option value="Research Paper">Research Paper</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="search-path">Search Path:</label>
+                    <input type="text" id="search-path" placeholder="Search within path..." aria-label="Search within path">
+                </div>
+            </div>
+
+            <div id="learning-path-output" class="path-container">
+                <p>Enter your interests above and click "Generate Path" to see your personalized learning journey.</p>
+            </div>
+            <div id="message-area" class="message-area"></div>
+            <!-- NEW: Loading spinner -->
+            <div id="loading-spinner" class="loading-spinner"></div>
+        </section>
+
+        <!-- New section for Favorite Resources -->
+        <section class="favorites-section">
+            <h2>Your Favorite Resources</h2>
+            <div id="favorite-resources-output" class="path-container">
+                <p>Mark resources as favorite in your learning path to see them here.</p>
+            </div>
+        </section>
+
+        <!-- Section for My Saved Paths -->
+        <section class="saved-paths-section">
+            <h2>My Saved Paths</h2>
+            <div id="saved-paths-output" class="path-container">
+                <p>No saved paths found. Generate and save a path to see it here!</p>
+            </div>
+        </section>
+
+        <!-- NEW: Section for Achievements -->
+        <section class="achievements-section">
+            <h2>Achievements</h2>
+            <div id="achievements-output" class="path-container">
+                <p>Complete resources and paths to earn achievements!</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Learning Path Generator</p>
+    </footer>
+
+    <!-- Confetti library for celebrations -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Floating Success Message Container -->
+    <div id="floating-success-message" class="floating-success-message">
+        <p id="floating-success-text"></p>
+    </div>
+</body>
+
+</html>

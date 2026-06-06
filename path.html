@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Path – AuraLearn</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" type="module"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="interest.html">Generate Path</a>
+        <a href="study.html">Study Module</a>
+        <a href="favorites.html">Saved Paths</a>
+        <a href="gamification.html">Gamification</a>
+        <a href="achievements.html">Achievements</a>
+        <a href="signin.html">Sign In</a>
+    </nav>
+    <div class="hero">
+        <div class="hero-background" style="background-image: url('https://images.unsplash.com/photo-1522204523234-8729aa6e993f?q=80&w=2940&auto=format&fit=crop');"></div>
+        <div class="hero-content">
+            <h1>Your Learning Path</h1>
+            <p>Your personalized learning journey.</p>
+        </div>
+    </div>
+    <main>
+        <section class="content-section">
+            <div id="path-content" class="path-container">
+                <div class="progress-bar-container">
+                    <div id="progress-bar-fill" class="progress-bar-fill" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+
+                <div id="learning-path-steps">
+                    <p class="message-area info">Loading path data...</p>
+                </div>
+            </div>
+            <div class="button-group" style="margin-top: 20px;">
+                <button onclick="window.location.href='interest.html'" class="secondary-btn">Generate New Path</button>
+                <button id="favorite-path-btn" class="action-btn" style="display: none;">
+                    <span id="favorite-icon"></span>
+                    <span id="favorite-text"></span>
+                </button>
+            </div>
+            <div id="messages" class="message-area" style="margin-top: 10px; display:none;"></div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 AuraLearn. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamification – AuraLearn</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="script.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="interest.html">Generate Path</a>
+        <a href="study.html">Study Module</a>
+        <a href="favorites.html">Saved Paths</a>
+        <a href="gamification.html">Gamification</a>
+        <a href="achievements.html">Achievements</a>
+        <a href="signin.html">Sign In</a>
+    </nav>
+    <div class="hero">
+        <div class="hero-background" style="background-image: url('https://images.unsplash.com/photo-1549490349-86644d673117?q=80&w=2940&auto=format&fit=crop');"></div>
+        <div class="hero-content">
+            <h1>Gamification</h1>
+            <p>Earn points and badges as you learn!</p>
+        </div>
+    </div>
+    <main>
+        <section class="content-section">
+            <h2>Your Stats</h2>
+            <div style="display: flex; justify-content: space-around; gap: 20px;">
+                <div class="stat-card">
+                    <h3>Total Points</h3>
+                    <p id="total-points" class="stat-value">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Steps Completed</h3>
+                    <p id="steps-completed" class="stat-value">0</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>Play Games</h2>
+            <p>Choose a game based on your learning path!</p>
+            <div class="button-group">
+                <button id="generate-quiz-btn" class="action-btn">Quick Quiz</button>
+                <button id="generate-flashcard-btn" class="action-btn">Flashcards</button>
+                <button id="generate-wordscramble-btn" class="action-btn">Word Scramble</button>
+            </div>
+            <div id="game-area" style="margin-top: 20px;"></div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 AuraLearn. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>

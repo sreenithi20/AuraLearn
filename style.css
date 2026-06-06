@@ -1,0 +1,582 @@
+/* --- Global Styles --- */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&family=Playfair+Display:wght@400;600&display=swap');
+:root {
+    --bg-color: #0d0d0d;
+    --text-color: #f0f0f0;
+    --primary-color: #b3a593;
+    /* Muted gold/bronze */
+    --accent-color: #f7e1b3;
+    /* Lighter gold */
+    --card-bg: #1a1a1a;
+    --border-color: #2c2c2c;
+    --light-border: #444;
+}
+
+body {
+    font-family: 'Roboto Mono', monospace;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
+    /* 💡 ADD THESE TWO PROPERTIES */
+    position: relative;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    color: var(--accent-color);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://images.unsplash.com/photo-1542435503-956c469947f6?q=80&w=2910&auto=format&fit=crop');
+    /* Replace with your image */
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.4) grayscale(0.5);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+}
+
+.hero h1 {
+    font-size: 4.5rem;
+    color: #fff;
+    margin: 0;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.hero p {
+    font-size: 1.5rem;
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.navbar {
+    background-color: var(--bg-color);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar a {
+    color: var(--text-color);
+    text-align: center;
+    padding: 14px 25px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.navbar a:hover {
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+main {
+    flex: 1;
+    padding: 50px 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 3;
+}
+
+.content-section {
+    padding: 40px;
+    margin-bottom: 50px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background-color: var(--card-bg);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.content-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #888;
+    font-size: 0.9rem;
+    background-color: var(--bg-color);
+    border-top: 1px solid var(--border-color);
+    margin-top: auto;
+}
+
+
+/* --- Form and Button Styles --- */
+
+.input-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--light-border);
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 12px 25px;
+    border: 1px solid var(--primary-color);
+    background-color: transparent;
+    color: var(--primary-color);
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.action-btn {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+}
+
+.action-btn:hover {
+    background-color: var(--accent-color);
+    color: #000;
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.secondary-btn {
+    background-color: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.secondary-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    transform: translateY(-2px);
+}
+
+
+/* --- Specific Page Styles --- */
+
+.path-item {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    border: 1px solid var(--border-color);
+}
+
+.resource-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0 0;
+}
+
+.resource-item {
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--light-border);
+}
+
+.resource-item:last-child {
+    border-bottom: none;
+}
+
+.resource-item a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.resource-item a:hover {
+    color: var(--primary-color);
+}
+
+.message-area {
+    padding: 12px;
+    border-radius: 8px;
+    margin: 15px 0;
+    font-size: 0.95rem;
+    text-align: center;
+    font-weight: 500;
+}
+
+.message-area.info {
+    background-color: #2c3e50;
+    color: #a9c5df;
+}
+
+.message-area.success {
+    background-color: #274737;
+    color: #8cbf99;
+}
+
+.message-area.warning {
+    background-color: #4a3e21;
+    color: #f7e1b3;
+}
+
+.message-area.error {
+    background-color: #4f2d30;
+    color: #e28e94;
+}
+
+
+/* Flashcards and Gamification */
+
+.stat-card {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-top: 10px;
+}
+
+.flashcard {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+
+/* Responsive adjustments */
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    .hero p {
+        font-size: 1.1rem;
+    }
+    .navbar {
+        flex-direction: column;
+    }
+    .navbar a {
+        padding: 10px;
+    }
+    main {
+        padding: 20px 10px;
+    }
+    .content-section {
+        padding: 20px;
+    }
+    h2 {
+        font-size: 2rem;
+    }
+}
+
+
+/* --- Favorites.html Link Styles --- */
+
+.input-form-card {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 30px;
+}
+
+.input-form-card h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.link-list {
+    list-style: none;
+    padding: 0;
+}
+
+.favorite-link-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.favorite-link-item:last-child {
+    border-bottom: none;
+}
+
+.favorite-link-item a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.2s;
+}
+
+.favorite-link-item a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.delete-link-btn {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    margin-left: 15px;
+    background-color: #5a1a1a;
+    /* Dark red for delete */
+    color: white;
+    border: 1px solid #8b0000;
+}
+
+.delete-link-btn:hover {
+    background-color: #8b0000;
+}
+
+
+/* In the body selector, make sure you have these properties: */
+
+body {
+    /* ... other existing styles ... */
+    position: relative;
+    /* IMPORTANT: Ensures pseudo-element position is relative to body */
+    overflow-x: hidden;
+    /* IMPORTANT: Prevents scrollbar when background moves */
+}
+
+
+/* Add this entire block of CSS anywhere in style.css, preferably near the top global styles */
+
+
+/* --- Live Background Effect: Subtle Flowing Aura --- */
+
+
+/* 1. Define the subtle movement animation */
+
+
+/* ------------------------------------------------------------------ */
+
+
+/* --- LIVE BACKGROUND EFFECT: ENHANCED FLOWING AURA (Gold Theme) --- */
+
+
+/* ------------------------------------------------------------------ */
+
+
+/* 1. Define the subtle movement animation (A very slow diagonal drift) */
+
+@keyframes background-flow {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+        /* Moves to the opposite corner */
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+
+/* 2. Apply the effect using a fixed pseudo-element to sit behind all content */
+
+body::before {
+    content: '';
+    position: fixed;
+    /* Stays in place when scrolling */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    /* Ensures it is behind the main content */
+    /* * Creates four large, faint radial gradients using your theme colors.
+     * The color stops (0%, transparent 15%) create soft, fading orbs.
+     */
+    background: radial-gradient(circle at 5% 5%, var(--primary-color) 0%, transparent 15%), radial-gradient(circle at 95% 20%, var(--accent-color) 0%, transparent 15%), radial-gradient(circle at 30% 80%, var(--primary-color) 0%, transparent 15%), radial-gradient(circle at 70% 40%, var(--accent-color) 0%, transparent 15%);
+    background-size: 400% 400%;
+    /* Make the background much larger for sweeping movement */
+    opacity: 0.08;
+    /* Increased from 0.04 to 0.08 for better visibility */
+    /* Apply the animation: 90 seconds is slow and non-distracting. */
+    animation: background-flow 90s linear infinite alternate;
+}
+
+
+/* ------------------------------------------------------------------ */
+
+
+/* --- LIVE BACKGROUND EFFECT 1: FLOWING AURA (The original effect) --- */
+
+
+/* ------------------------------------------------------------------ */
+
+@keyframes aura-flow {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-size: 400% 400%;
+    background: radial-gradient(circle at 5% 5%, var(--primary-color) 0%, transparent 15%), radial-gradient(circle at 95% 20%, var(--accent-color) 0%, transparent 15%), radial-gradient(circle at 30% 80%, var(--primary-color) 0%, transparent 15%), radial-gradient(circle at 70% 40%, var(--accent-color) 0%, transparent 15%);
+    opacity: 0.08;
+    animation: aura-flow 90s linear infinite alternate;
+}
+
+
+/* ----------------------------------------------------------------- */
+
+
+/* --- LIVE BACKGROUND EFFECT 2: SUBTLE BINARY RAIN (New effect) --- */
+
+
+/* ----------------------------------------------------------------- */
+
+@keyframes binary-scroll {
+    to {
+        background-position: 0 -100vh;
+        /* Scroll the background 100% vertically */
+    }
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    /* Keep it behind all content, same as '::before' */
+    pointer-events: none;
+    /* Allows clicks to pass through */
+    /* The "Binary" texture is created using a linear gradient, 
+       with a very faint color from your scheme (white in this case) */
+    background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 100% 20px;
+    /* Horizontal lines every 20px */
+    opacity: 0.05;
+    /* EXTREMELY subtle */
+    /* The effect: slow, continuous vertical scroll */
+    animation: binary-scroll 60s linear infinite;
+}
