@@ -23,7 +23,7 @@ import {
 
 // ✅ Your actual Firebase config (Retained from your snippets)
 const firebaseConfig = {
-    apiKey: "AIzaSyCxmnIFjxaOCfaVuXOlubO0q5-dLUXTtSs",
+    apiKey: "YOUR_API_KEY",
     authDomain: "aura-learn.firebaseapp.com",
     projectId: "aura-learn",
     storageBucket: "aura-learn.firebasestorage.app",
